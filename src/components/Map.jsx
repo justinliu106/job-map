@@ -1,27 +1,16 @@
-import {
-  MapContainer,
-  TileLayer,
-  useMap,
-  Popup,
-  Marker,
-} from 'https://cdn.esm.sh/react-leaflet'
+import { MapContainer, TileLayer, useMap, Popup, Marker } from 'react-leaflet'
+import 'leaflet/dist/leaflet.css';
 
 
 export default function Map() {
     return (
         <div className="map">
-            <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}>
+            <MapContainer center={[53.5461, -113.4938]} zoom={13} style={{ height: '100%' }}>
                 <TileLayer
-                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    attribution='&copy; OpenStreetMap contributors'
                 />
-                <Marker position={[51.505, -0.09]}>
-                <Popup>
-                    A pretty CSS3 popup. <br /> Easily customizable.
-                </Popup>
-                </Marker>
             </MapContainer>
-
         </div>
     );
 }
