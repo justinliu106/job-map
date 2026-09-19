@@ -1,9 +1,9 @@
-export default function JobCard() {
+export default function JobCard({ job }) {
     return (
         <div className="jobCard">
-            <h2>Job Title</h2>
-            <h3>Company</h3>
-            <h3>Address</h3>
+            <h2>{job.title}</h2>
+            <h3>{job.company}</h3>
+            <h3>{job.exact_location || job.location}</h3>
         </div>
     );
 }
