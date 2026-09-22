@@ -12,25 +12,33 @@ app.get('/api/jobs', async (req, res) => {
 
 async function getCoords(location) {
     try {
+        console.log("get coords called")
         const encodedLocation = encodeURIComponent(location);
-        const res = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodedLocation}`);
+        const res = await fetch(`https://api.mapbox.com/search/geocode/v6/forward?q=${encodedLocation}&access_token=${process.env.MAPBOX_TOKEN}`);
         const data = await res.json();
 
-        const lat = data[0].lat;
-        const lon = data[0].lon;
-        const coord = [];
-        coord.push(lat, lon);
-        return coord
+        if (!data || data.length === 0) return null;
+
+        const [lon, lat] = data.features[0].geometry.coordinates;
+        return [lat, lon];
     } catch (error) {
         console.log("Getcoords failed.", error)
+        return null
     }
 }
 
 app.post('/api/jobs', async (req, res) => {
     const { id, title, company, exactLocation, location, salary, url } = req.body;
-    const coords = await getCoords(exactLocation);
-    const lat = coords[0];
-    const lon = coords[1];
+    let lat = null;
+    let lon = null;
+
+    if (exactLocation) {
+        const coords = await getCoords(exactLocation);
+        if (coords) {
+            lat = coords[0];
+            lon = coords[1];
+        }
+    }
 
     await pool.query(
         `INSERT INTO jobs (id, title, company, exact_location, location, salary, url, latitude, longitude) 
