@@ -1,19 +1,15 @@
-import { useState, useEffect } from 'react'
 import JobCard from "./JobCard"
+import { useState } from "react";
 
-export default function SideBar() {
-    const [jobs, setJobs] = useState([]);
-
-    useEffect(() => {
-        fetch('http://localhost:3000/api/jobs')
-        .then(res => res.json())
-        .then(data => setJobs(data));
-    }, []);
-
-     return (
+export default function SideBar({ jobs }) {
+    const [selectedJob, setSelectedJob] = useState()
+    function handleJobCardClick(id) {
+        setSelectedJob(id);
+    }
+    return (
         <div className="sideBar">
             {jobs.map(job => (
-                <JobCard key={job.id} job={job} />
+                <JobCard key={job.id} job={job} onJobCardClick={handleJobCardClick} selectedJob={selectedJob}/>
             ))}
         </div>
     );
