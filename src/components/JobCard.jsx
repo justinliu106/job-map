@@ -1,11 +1,11 @@
-export default function JobCard({ job, onJobCardClick, selectedJob }) {
+export default function JobCard({ job, onJobCardClick, activeJob }) {
     function handleClick() {
         onJobCardClick(job.id)
     }
 
-    const isSelected = job.id === selectedJob;
+    const isActive = job.id === activeJob;
     return (
-        <div className={`jobCard ${isSelected ? "selected" : ""}`} id={job.id} onClick={handleClick}>
+        <div className={`jobCard ${isActive ? "active" : ""}`} id={job.id} onClick={handleClick}>
             <h2>{job.title}</h2>
             <h3>{job.company}</h3>
             <h3>{job.exact_location || job.location}</h3>
