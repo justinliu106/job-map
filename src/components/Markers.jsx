@@ -1,17 +1,36 @@
-import { Marker, Popup } from 'react-leaflet';
+import { Marker, Popup, useMap } from 'react-leaflet';
+import { useEffect } from 'react';
+import { useRef } from 'react';
 
 export default function Markers({ jobs, activeJob, setActiveJob }) {
-
     const validJobs = jobs.filter(job => job.latitude && job.longitude)
+    const map = useMap();
+    const markerRefs = useRef({});
+
+    useEffect(() => {
+        const job = jobs.find(j => j.id === activeJob);
+        if (job) {
+            map.flyTo([job.latitude, job.longitude]);
+            markerRefs.current[job.id]?.openPopup();
+        }
+    }, [activeJob]);
+
     return (
         <>
             {validJobs.map(job => {
-                const isActive = job.id === activeJob;
-                <Marker key={job.id} position={[job.latitude, job.longitude]} id={job.id}>
-                    <Popup>
-                        {job.company} <br /> {job.title}
-                    </Popup>
-                </Marker>
+                return (
+                    <Marker
+                        key={job.id}
+                        position={[job.latitude, job.longitude]}
+                        id={job.id}
+                        eventHandlers={{ click: () => setActiveJob(job.id) }}
+                        ref={(mkr) => { if (mkr) markerRefs.current[job.id] = mkr; }}
+                    >
+                        <Popup>
+                            {job.company} <br /> {job.title}
+                        </Popup>
+                    </Marker>
+                )
             })}
         </>
     );
