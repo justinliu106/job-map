@@ -6,7 +6,7 @@ app.use(express.json());
 app.use(cors());
 
 app.get('/api/jobs', async (req, res) => {
-    const result = await pool.query('SELECT * FROM jobs');
+    const result = await pool.query('SELECT * FROM jobs WHERE latitude IS NOT NULL AND longitude IS NOT NULL');
     res.json(result.rows)
 })
 
