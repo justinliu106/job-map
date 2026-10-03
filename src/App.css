@@ -40,6 +40,7 @@
   padding: 10px;
   width: 100%;
   border: 1px solid black;
+  box-sizing: border-box;
 }
 
 .jobCard h3, h2 {
@@ -48,4 +49,17 @@
 
 .jobCard.active {
   border: 2px solid blue;
+}
+
+.user-location-marker {
+  background-color: blue;
+  border-radius: 100%;
+}
+
+.sideBarFilterContainer {
+  height: 50px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  background-color: white;
 }
