@@ -1,5 +1,6 @@
 import JobCard from "./JobCard"
-import { useState } from "react";
+import SideBarFilter from "./SidebarFilter";
+import SearchBar from "./SearchBar";
 
 export default function SideBar({ jobs, activeJob, setActiveJob }) {
     function handleJobCardClick(id) {
@@ -7,6 +8,12 @@ export default function SideBar({ jobs, activeJob, setActiveJob }) {
     }
     return (
         <div className="sideBar">
+            <div className="filterContainer">
+                <SearchBar>
+                </SearchBar>
+                <SideBarFilter>
+                </SideBarFilter>
+            </div>
             {jobs.map(job => (
                 <JobCard key={job.id} job={job} onJobCardClick={handleJobCardClick} activeJob={activeJob}/>
             ))}

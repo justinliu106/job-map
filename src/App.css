@@ -56,10 +56,15 @@
   border-radius: 100%;
 }
 
-.sideBarFilterContainer {
+.filterContainer {
+  display: flex;
+  flex-direction: column;
   height: 50px;
-  flex-shrink: 0;
   position: sticky;
   top: 0;
   background-color: white;
+}
+
+.filterButton {
+  align-self: flex-end;
 }

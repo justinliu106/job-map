@@ -9,6 +9,7 @@ export default function JobCard({ job, onJobCardClick, activeJob }) {
             <h2>{job.title}</h2>
             <h3>{job.company}</h3>
             <h3>{job.exact_location || job.location}</h3>
+            <a href={`${job.url}`} target="_blank" rel="noopener noreferrer">Indeed Link</a>
         </div>
     );
 }

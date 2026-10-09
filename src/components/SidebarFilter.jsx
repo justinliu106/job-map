@@ -1,9 +1,7 @@
 export default function SideBarFilter() {
     return (
-        <div className="sideBarFilterContainer">
-            <button>
+        <button className="filterButton">
             Filter
         </button>
-        </div>
     )
 }
