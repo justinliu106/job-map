@@ -17,11 +17,11 @@ function useCurrentLocation() {
                 }
             )
         }, [])
+        console.log(position);
         return position;
     }
 
-export default function Map({ jobs, activeJob, setActiveJob }) {
-    const userLocation = useCurrentLocation();
+export default function Map({ jobs, activeJob, setActiveJob, userLocation }) {
     const userIcon = L.divIcon({
         className:'user-location-marker',
         iconSize: [24,24],
@@ -36,7 +36,7 @@ export default function Map({ jobs, activeJob, setActiveJob }) {
                 <Markers jobs={jobs} activeJob={activeJob} setActiveJob={setActiveJob}>
                 </Markers>
                 {userLocation && (
-                    <Marker position={userLocation} icon={userIcon}>
+                    <Marker position={[53.631611, -113.323975]} icon={userIcon}>
                         <Popup>
                             You are here
                         </Popup>

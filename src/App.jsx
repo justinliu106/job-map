@@ -7,6 +7,7 @@ import { useState, useEffect} from 'react';
 function App() {
   const [jobs, setJobs] = useState([]);
   const [activeJob, setActiveJob] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     fetch('http://localhost:3000/api/jobs')
@@ -14,12 +15,33 @@ function App() {
     .then(data => setJobs(data))
   }, []);
 
+  const visibleJobs = jobs.filter(job =>
+    job.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  function useCurrentLocation() {
+        const [position, setPosition] = useState(null);
+
+        useEffect(() => {
+            navigator.geolocation.getCurrentPosition(
+                (pos) => {
+                    setPosition([pos.coords.latitude, pos.coords.longitude])
+                },
+                (err) => {
+                    console.log("Error getting current location", err);
+                }
+            )
+        }, [])
+        console.log(position);
+        return position;
+    }
+
   return (
     <div className="appContainer">
       <TopBar />
       <div className="mainContent">
-        <Map jobs={jobs} activeJob={activeJob} setActiveJob={setActiveJob}/>
-        <Sidebar jobs={jobs} activeJob={activeJob} setActiveJob={setActiveJob}/>      
+        <Map jobs={visibleJobs} activeJob={activeJob} setActiveJob={setActiveJob} userLocation={useCurrentLocation()}/>
+        <Sidebar jobs={visibleJobs} activeJob={activeJob} setActiveJob={setActiveJob} setSearchTerm={setSearchTerm}/>      
       </div>
     </div>
   )

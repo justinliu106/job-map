@@ -66,5 +66,13 @@
 }
 
 .filterButton {
-  align-self: flex-end;
+  align-self: center;
+}
+
+.searchContainer {
+  display: flex;
+}
+
+.searchBar {
+  width: 100%;
 }
