@@ -1,8 +1,9 @@
 import { Marker, Popup, useMap } from 'react-leaflet';
 import { useEffect } from 'react';
 import { useRef } from 'react';
+import haversineDistance from '../utils/distance.js';
 
-export default function Markers({ jobs, activeJob, setActiveJob }) {
+export default function Markers({ jobs, activeJob, setActiveJob, userLocation }) {
     const validJobs = jobs.filter(job => job.latitude && job.longitude)
     const map = useMap();
     const markerRefs = useRef({});
@@ -27,7 +28,9 @@ export default function Markers({ jobs, activeJob, setActiveJob }) {
                         ref={(mkr) => { if (mkr) markerRefs.current[job.id] = mkr; }}
                     >
                         <Popup>
-                            {job.company} <br /> {job.title}
+                            {job.company} <br /> {job.title} 
+                            <br />
+                            Distance from you: {Math.round(haversineDistance(job.latitude, job.longitude, 53.631611, -113.323975)*10)/10} km
                         </Popup>
                     </Marker>
                 )

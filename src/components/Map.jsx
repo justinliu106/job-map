@@ -4,23 +4,6 @@ import 'leaflet/dist/leaflet.css';
 import { useEffect, useState } from 'react';
 import Markers from './Markers';
 
-function useCurrentLocation() {
-        const [position, setPosition] = useState(null);
-
-        useEffect(() => {
-            navigator.geolocation.getCurrentPosition(
-                (pos) => {
-                    setPosition([pos.coords.latitude, pos.coords.longitude])
-                },
-                (err) => {
-                    console.log("Error getting current location", err);
-                }
-            )
-        }, [])
-        console.log(position);
-        return position;
-    }
-
 export default function Map({ jobs, activeJob, setActiveJob, userLocation }) {
     const userIcon = L.divIcon({
         className:'user-location-marker',
@@ -33,7 +16,7 @@ export default function Map({ jobs, activeJob, setActiveJob, userLocation }) {
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     attribution='&copy; OpenStreetMap contributors'
                 />
-                <Markers jobs={jobs} activeJob={activeJob} setActiveJob={setActiveJob}>
+                <Markers jobs={jobs} activeJob={activeJob} setActiveJob={setActiveJob} userLocation={userLocation}>
                 </Markers>
                 {userLocation && (
                     <Marker position={[53.631611, -113.323975]} icon={userIcon}>
