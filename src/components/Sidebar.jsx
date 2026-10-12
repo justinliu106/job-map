@@ -2,7 +2,7 @@ import JobCard from "./JobCard"
 import SideBarFilter from "./SidebarFilter";
 import SearchBar from "./SearchBar";
 
-export default function SideBar({ jobs, activeJob, setActiveJob, setSearchTerm }) {
+export default function SideBar({ jobs, activeJob, setActiveJob, setSearchTerm, setFilteredDistance, filteredDistance }) {
     function handleJobCardClick(id) {
         setActiveJob(id);
     }
@@ -11,7 +11,7 @@ export default function SideBar({ jobs, activeJob, setActiveJob, setSearchTerm }
             <div className="filterContainer">
                 <SearchBar setSearchTerm={setSearchTerm}>
                 </SearchBar>
-                <SideBarFilter>
+                <SideBarFilter setFilteredDistance={setFilteredDistance} filteredDistance={filteredDistance}>
                 </SideBarFilter>
             </div>
             {jobs.map(job => (

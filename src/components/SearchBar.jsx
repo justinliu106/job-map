@@ -11,7 +11,7 @@ export default function SearchBar({setSearchTerm}) {
         }
     };
     return (
-        <>
+        <div className="searchContainer">
             <input 
             value={draft} 
             type="text" 
@@ -25,6 +25,6 @@ export default function SearchBar({setSearchTerm}) {
             >
             Search
             </button>
-        </>
+        </div>
     )
 }

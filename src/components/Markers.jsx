@@ -28,9 +28,9 @@ export default function Markers({ jobs, activeJob, setActiveJob, userLocation })
                         ref={(mkr) => { if (mkr) markerRefs.current[job.id] = mkr; }}
                     >
                         <Popup>
-                            {job.company} <br /> {job.title} 
+                            {job.company} <br /> {job.title}
                             <br />
-                            Distance from you: {Math.round(haversineDistance(job.latitude, job.longitude, 53.631611, -113.323975)*10)/10} km
+                            Distance from you: {Math.round(haversineDistance(job.latitude, job.longitude, 53.631611, -113.323975) * 10) / 10} km
                         </Popup>
                     </Marker>
                 )

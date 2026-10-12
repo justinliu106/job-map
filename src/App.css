@@ -76,3 +76,31 @@
 .searchBar {
   width: 100%;
 }
+
+.filterButtonContainer {
+  align-self: center;
+}
+
+
+.filterPopup {
+  position: absolute;
+  background-color: lightgrey; 
+  z-index: 10;
+  width: 100%;
+  top: 100%;
+  left: 0;
+  height: 300%;
+}
+
+.distanceContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.distanceInputContainer {
+  display: flex;
+}
+
+.distanceDisplay {
+  width: 10%;
+}

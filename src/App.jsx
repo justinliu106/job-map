@@ -8,6 +8,7 @@ function App() {
   const [jobs, setJobs] = useState([]);
   const [activeJob, setActiveJob] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [filteredDistance, setFilteredDistance] = useState(0);
 
   useEffect(() => {
     fetch('http://localhost:3000/api/jobs')
@@ -40,8 +41,20 @@ function App() {
     <div className="appContainer">
       <TopBar />
       <div className="mainContent">
-        <Map jobs={visibleJobs} activeJob={activeJob} setActiveJob={setActiveJob} userLocation={useCurrentLocation()}/>
-        <Sidebar jobs={visibleJobs} activeJob={activeJob} setActiveJob={setActiveJob} setSearchTerm={setSearchTerm}/>      
+        <Map 
+        jobs={visibleJobs} 
+        activeJob={activeJob} 
+        setActiveJob={setActiveJob} 
+        userLocation={useCurrentLocation()}
+        />
+        <Sidebar 
+        jobs={visibleJobs} 
+        activeJob={activeJob} 
+        setActiveJob={setActiveJob} 
+        setSearchTerm={setSearchTerm} 
+        setFilteredDistance={setFilteredDistance}
+        filteredDistance={filteredDistance}
+        />      
       </div>
     </div>
   )
